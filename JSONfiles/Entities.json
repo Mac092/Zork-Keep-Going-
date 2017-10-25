@@ -1,0 +1,39 @@
+{
+	"Room1": {
+		"Type": "Room",
+		"Name": "Outskirts",
+		"Description": "The outer parts of the enemies facility, you are surrounded by wild vegetation"
+	},
+	"Player1": {
+		"Type": "Player",
+		"Name": "The Answer" ,
+		"CurrentLocation": "Outskirts",
+		"HP": 100,
+		"Attack": 10,
+		"Inventory": ["Telephone"],
+		"IsAlive": true,
+		"CurrentWeapon": "Knife"
+	},
+	"Player2": {
+		"Type": "Player",
+		"Name": "bloblo" ,
+		"CurrentLocation": "Warehouse",
+		"HP": 100,
+		"Attack": 10,
+		"Inventory": ["Truck Keys"],
+		"IsAlive": true,
+		"CurrentWeapon": "Gun"
+	},
+	"Player3": {
+		"Type": "Player",
+		"Name": "estoeU" ,
+		"CurrentLocation": "Warehouse",
+		"HP": 100,
+		"Attack": 10,
+		"Inventory": ["Truck Keys"],
+		"IsAlive": true,
+		"CurrentWeapon": "Gun"
+	}
+ }
+ 
+
