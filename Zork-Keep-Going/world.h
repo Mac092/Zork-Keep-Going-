@@ -3,7 +3,7 @@
 #include "entity.h"
 #include "player.h"
 #include <time.h>
-#include "..\json-develop\src\json.hpp"
+#include "json.hpp"
 
 class World {
 public:

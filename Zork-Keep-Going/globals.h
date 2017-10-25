@@ -1,6 +1,6 @@
 #pragma once
 
-#define ENTITIES_JSON_PATH "../JSONfiles/Entities.json"
+#define ENTITIES_JSON_PATH "../../JSONfiles/Entities.json"
 
 #define ENTITY_KEY_ROOMS "Room"
 #define ENTITY_KEY_EXITS "Exit"
