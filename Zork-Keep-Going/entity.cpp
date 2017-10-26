@@ -28,8 +28,3 @@ void Entity::setBelongsTo(Entity * belongs)
 }
 
 
-
-void Entity::Look() const
-{
-}
-

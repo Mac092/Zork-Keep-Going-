@@ -20,8 +20,6 @@ public:
 
 	virtual Entity* Find(std::string name) = 0;
 
-	virtual void Look() const;
-
 	EntityType type;
 
 private:

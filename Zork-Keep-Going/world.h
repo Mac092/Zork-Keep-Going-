@@ -9,7 +9,10 @@ class World {
 public:
 	World();
 	~World(); 
+
+	void welcomeToZork();
 	void initializeEntitiesData();
+	nlohmann::json sortJSONEntities(nlohmann::json nonSortedEntities);
 	Entity* find(std::string entityName, EntityType entityType);
 	//void evaluatePlayersAction();
 	std::vector<std::string> buildUserFullInput(std::vector<std::string> structuredPlayerInput, const std::string playerInput);

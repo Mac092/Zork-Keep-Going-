@@ -16,6 +16,8 @@ int main(int argc, char ** argv) {
 
 	//Games initialization
 	world.initializeEntitiesData();
+	//
+	world.welcomeToZork();
 
 	//Game main loop
 	while (1) {
@@ -30,6 +32,9 @@ int main(int argc, char ** argv) {
 				break;
 			case RETURN_KEYBOARD_CODE:
 				structuredPlayerInput = world.buildUserFullInput(structuredPlayerInput, playerInput);
+				break;
+			case ESCAPE_KEYBOARD_CODE:
+				world.~World();
 				break;
 			default:
 				playerInput += keyInput;

@@ -3,7 +3,7 @@
 
 
 Character::Character(std::string name, std::string description, std::string currentLocation, int lifePoints, int attackStrength, 
-	std::vector<std::string> inventory, bool isAlive, weapon* currentWeapon, Room* room) : Entity(name, description, room)
+	std::vector <std::map<std::string, int>> inventory, bool isAlive, Weapon* currentWeapon, Room* room) : Entity(name, description, room)
 {
 	setCurrentLocation(currentLocation);
 	setLifePoints(lifePoints);
@@ -55,15 +55,17 @@ int Character::getAttackStrength()
 	return attackStrength;
 }
 
-void Character::setInventory(std::vector<std::string> inventory)
+void Character::setInventory(std::vector<std::map<std::string, int>> inventory)
 {
 	this->inventory = inventory;
 }
 
-std::vector<std::string> Character::getInventory()
+std::vector<std::map<std::string, int>> Character::getInventory()
 {
 	return inventory;
 }
+
+
 
 void Character::setIsAlive(bool isAlive)
 {
@@ -75,12 +77,12 @@ bool Character::getIsAlive()
 	return isAlive;
 }
 
-void Character::setCurrentWeapon(weapon * weapon)
+void Character::setCurrentWeapon(Weapon * weapon)
 {
 	currentWeapon = weapon;
 }
 
-weapon * Character::getCurrentWeapon()
+Weapon * Character::getCurrentWeapon()
 {
 	return currentWeapon;
 }

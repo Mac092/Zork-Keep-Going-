@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <map>
 #include <memory.h>
 #include "entity.h"
 #include "weapon.h"
@@ -10,30 +11,31 @@ class Character: public Entity {
 
 public:
 	
-	Character(std::string,std::string, std::string, int, int, std::vector<std::string>, bool, weapon*, Room*);
+	Character(std::string,std::string, std::string, int, int, std::vector <std::map<std::string, int>>, bool, Weapon*, Room*);
 	~Character();
 
 	virtual Character* Find(std::string name);
 
+	//Character's class variables getters and setters
 	void setCurrentLocation(std::string currentLocation);
 	std::string getCurrentLocation();
 	void setLifePoints(int lifePoints);
 	int getLifePoints();
 	void setAttackStrength(int attackStrength);
 	int getAttackStrength();
-	void setInventory(std::vector < std::string> inventory);
-	std::vector<std::string> getInventory();
+	void setInventory(std::vector <std::map<std::string, int>> inventory);
+	std::vector <std::map<std::string, int>> getInventory();
 	void setIsAlive(bool isAlive);
 	bool getIsAlive();
-	void setCurrentWeapon(weapon* weapon);
-	weapon* getCurrentWeapon();
+	void setCurrentWeapon(Weapon* weapon);
+	Weapon* getCurrentWeapon();
 
 
 private:
 	std::string currentLocation;
 	int lifePoints;
 	int attackStrength;
-	std::vector<std::string> inventory; //allocated memory
+	std::vector <std::map<std::string, int>> inventory; //allocated memory
 	bool isAlive;
-	weapon* currentWeapon;
+	Weapon* currentWeapon;
 };
