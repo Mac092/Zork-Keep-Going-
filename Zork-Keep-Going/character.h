@@ -1,3 +1,6 @@
+#ifndef CHARACTER
+#define CHARACTER
+
 #include <string>
 #include <vector>
 #include <map>
@@ -11,7 +14,7 @@ class Character: public Entity {
 
 public:
 	
-	Character(std::string,std::string, std::string, int, int, std::vector <std::map<std::string, int>>, bool, Weapon*, Room*);
+	Character(std::string,std::string, int, int, std::map<std::string, int>, bool, Weapon*, Room*);
 	~Character();
 
 	virtual Character* Find(std::string name);
@@ -23,8 +26,8 @@ public:
 	int getLifePoints();
 	void setAttackStrength(int attackStrength);
 	int getAttackStrength();
-	void setInventory(std::vector <std::map<std::string, int>> inventory);
-	std::vector <std::map<std::string, int>> getInventory();
+	void setInventory(std::map<std::string, int> inventory);
+	std::map<std::string, int> getInventory();
 	void setIsAlive(bool isAlive);
 	bool getIsAlive();
 	void setCurrentWeapon(Weapon* weapon);
@@ -35,7 +38,8 @@ private:
 	std::string currentLocation;
 	int lifePoints;
 	int attackStrength;
-	std::vector <std::map<std::string, int>> inventory; //allocated memory
+	std::map<std::string, int> inventory; //allocated memory
 	bool isAlive;
 	Weapon* currentWeapon;
 };
+#endif

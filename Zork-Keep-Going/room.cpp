@@ -1,7 +1,8 @@
 
 #include "Room.h"
 
-Room::Room(const std::string name, const std::string description, Entity * owner) : Entity(name, description, owner) {
+Room::Room(const std::string name, const std::string description, Entity * owner) 
+	: Entity(name, description, owner) {
 
 	type = ENTITY_ROOM;
 }

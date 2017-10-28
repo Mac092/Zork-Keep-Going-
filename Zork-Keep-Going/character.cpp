@@ -2,8 +2,9 @@
 #include "character.h"
 
 
-Character::Character(std::string name, std::string description, std::string currentLocation, int lifePoints, int attackStrength, 
-	std::vector <std::map<std::string, int>> inventory, bool isAlive, Weapon* currentWeapon, Room* room) : Entity(name, description, room)
+Character::Character(std::string name, std::string description, int lifePoints, int attackStrength, 
+	std::map<std::string, int> inventory, bool isAlive, Weapon* currentWeapon, Room* room)
+	: Entity(name, description, room)
 {
 	setCurrentLocation(currentLocation);
 	setLifePoints(lifePoints);
@@ -55,12 +56,12 @@ int Character::getAttackStrength()
 	return attackStrength;
 }
 
-void Character::setInventory(std::vector<std::map<std::string, int>> inventory)
+void Character::setInventory(std::map<std::string, int> inventory)
 {
 	this->inventory = inventory;
 }
 
-std::vector<std::map<std::string, int>> Character::getInventory()
+std::map<std::string, int> Character::getInventory()
 {
 	return inventory;
 }

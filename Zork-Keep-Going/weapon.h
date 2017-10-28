@@ -1,10 +1,10 @@
 #pragma once
 #include "item.h"
 
-class Weapon:public Item
+class Weapon: public Item
 {
 public:
-	Weapon();
+	Weapon(std::string name, std::string description, int power, Entity* parent);
 	~Weapon();
 };
 

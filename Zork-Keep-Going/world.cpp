@@ -1,6 +1,7 @@
 #include "world.h"
 #include "character.h"
 #include "globals.h"
+#include "exit.h"
 #include "json.hpp"
 #include <fstream>
 #include <vector>
@@ -44,22 +45,71 @@ void World::initializeEntitiesData()
 			worldEntities.push_back(room);
 		}
 		else if (sortedEntitiesIterator.value()["Type"] == ENTITY_KEY_EXITS) {
-			
+			Item *exitKey = nullptr;
+			Room *exitRoom = (Room*)find(sortedEntitiesIterator.value()["Origin"], ENTITY_ROOM);
+			if (!sortedEntitiesIterator.value()["Key"].is_null()) {
+				exitKey = (Item*)find(sortedEntitiesIterator.value()["Key"], ENTITY_ITEM);
+			}
+
+			Exit * exit = new Exit(sortedEntitiesIterator.value()["Name"], sortedEntitiesIterator.value()["Description"], exitRoom,
+				sortedEntitiesIterator.value()["Orientation"],sortedEntitiesIterator.value()["Destination"],
+				sortedEntitiesIterator.value()["Locked"], exitKey);
+			worldEntities.push_back(exit);
 		}
 		else if (sortedEntitiesIterator.value()["Type"] == ENTITY_KEY_CHARACTERS) {
 			Room *characterRoom = (Room*)find(sortedEntitiesIterator.value()["CurrentLocation"], ENTITY_ROOM);
 			Weapon *characterWeapon = (Weapon*)find(sortedEntitiesIterator.value()["CurrentWeapon"], ENTITY_WEAPON);
+			
 			Character *character = new Character(sortedEntitiesIterator.value()["Name"], sortedEntitiesIterator.value()["Description"],
-				sortedEntitiesIterator.value()["CurrentLocation"], sortedEntitiesIterator.value()["HP"],
-				sortedEntitiesIterator.value()["Attack"], sortedEntitiesIterator.value()["Inventory"], sortedEntitiesIterator.value()["IsAlive"],
-				characterWeapon, characterRoom);
+				sortedEntitiesIterator.value()["HP"],sortedEntitiesIterator.value()["Attack"],
+				sortedEntitiesIterator.value()["Inventory"],sortedEntitiesIterator.value()["IsAlive"],
+				characterWeapon,characterRoom);
+			worldEntities.push_back(character);
 		}
 		else if (sortedEntitiesIterator.value()["Type"] == ENTITY_KEY_PLAYERS) {
 			Room *playerRoom = (Room*)find(sortedEntitiesIterator.value()["CurrentLocation"], ENTITY_ROOM);
+			Weapon *playerWeapon = nullptr;
+			if (!sortedEntitiesIterator.value()["Key"].is_null()) {
+				playerWeapon = (Weapon*)find(sortedEntitiesIterator.value()["CurrentWeapon"], ENTITY_WEAPON);
+			}
+
+			Player *player = new Player(sortedEntitiesIterator.value()["Name"], sortedEntitiesIterator.value()["Description"],
+				sortedEntitiesIterator.value()["HP"], sortedEntitiesIterator.value()["Attack"],
+				sortedEntitiesIterator.value()["Inventory"], sortedEntitiesIterator.value()["IsAlive"],
+				playerWeapon, playerRoom);
+			worldEntities.push_back(player);
 		}
 		else if (sortedEntitiesIterator.value()["Type"] == ENTITY_KEY_ITEMS) {
+			Item *item = nullptr;
+
+			if (!sortedEntitiesIterator.value()["CurrentLocation"].is_null()) {
+				Room *itemRoom = nullptr;
+				itemRoom = (Room*)find(sortedEntitiesIterator.value()["CurrentLocation"], ENTITY_ROOM);
+				if (!itemRoom) {
+					delete(itemRoom);
+					Item *itemParent = nullptr;
+					itemParent = (Item*)find(sortedEntitiesIterator.value()["CurrentLocation"], ENTITY_ITEM);
+				}
+				item = new Item(sortedEntitiesIterator.value()["Name"], sortedEntitiesIterator.value()["Description"],
+					nullptr);
+			}
+			else {
+				item = new Item(sortedEntitiesIterator.value()["Name"], sortedEntitiesIterator.value()["Description"],
+				nullptr);
+			}
+			
+			item->setItems(sortedEntitiesIterator.value()["Items"]);
+			worldEntities.push_back(item);
 		}
 		else if (sortedEntitiesIterator.value()["Type"] == ENTITY_KEY_WEAPONS) {
+			Item *itemParent = nullptr;
+			if (!sortedEntitiesIterator.value()["CurrentLocation"].is_null()) {
+				itemParent = (Item*)find(sortedEntitiesIterator.value()["CurrentLocation"], ENTITY_ROOM);
+			}
+			Item *item = new Item(sortedEntitiesIterator.value()["Name"], sortedEntitiesIterator.value()["Description"],
+				itemParent);
+			item->setItems(sortedEntitiesIterator.value()["Items"]);
+			worldEntities.push_back(item);
 		}
 	}
 	
@@ -71,6 +121,7 @@ nlohmann::json World::sortJSONEntities(nlohmann::json nonSortedEntities)
 	std::vector<nlohmann::json> sortedJsonEntities;
 	nlohmann::json::iterator jsonEntitiesIterator;
 
+
 	for (jsonEntitiesIterator = nonSortedEntities.begin(); jsonEntitiesIterator != nonSortedEntities.end(); jsonEntitiesIterator++) {
 		bool individualSorted = false;
 		if (sortedJsonEntities.size() == 0) {
@@ -78,11 +129,11 @@ nlohmann::json World::sortJSONEntities(nlohmann::json nonSortedEntities)
 		}
 		else {
 			for (auto it = sortedJsonEntities.begin(); individualSorted == false && it != sortedJsonEntities.end();) {
-				if (jsonEntitiesIterator.value()["Order"] <= jsonEntitiesIterator.value()["Order"]) {
+				if (jsonEntitiesIterator.value()["Order"] <= (*it)["Order"]) {
 					sortedJsonEntities.insert(it, jsonEntitiesIterator.value());
 					individualSorted = true;
 				}
-				else if (it == sortedJsonEntities.end()) {
+				else if (std::next(it,1) == sortedJsonEntities.end()) {
 					sortedJsonEntities.push_back(jsonEntitiesIterator.value());
 					individualSorted = true;
 				}
@@ -91,8 +142,8 @@ nlohmann::json World::sortJSONEntities(nlohmann::json nonSortedEntities)
 				}
 			}
 		}
-
 	}
+	
 	return sortedJsonEntities;
 }
 

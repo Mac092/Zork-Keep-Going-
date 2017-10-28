@@ -1,44 +1,262 @@
-
 {
 	"Room1": {
 		"Type": "Room",
-		"Name": "outskirts",
-		"Description": "The outer parts of the enemies facility, you are surrounded by wild vegetation",
-		"Order": 0
+		"Name": "Outskirts",
+		"Description": "The outer parts of the enemies facility, you are surrounded by wild vegetation. ",
+		"Order": 1
+	},
+	"Room2": {
+		"Type": "Room",
+		"Name": "Yard",
+		"Description": "You can see the main entrance just a few steps farther. Enemies forces have been deployed all around the building and' The Bird's ' body still lays there... ",
+		"Order": 1
+	},
+	"Room3": {
+		"Type": "Room",
+		"Name": "Main Hall",
+		"Description": "There is a wide area in front of your eyes, dozens of columns scattered in the room. There is a security station with a prominent control table in one of the corners",
+		"Order": 1
+	},
+	"Room4": {
+		"Type": "Room",
+		"Name": "Lab",
+		"Description": "There are unusual machines and manufacturing chains all across the room. It seems like there is no current process going on. ",
+		"Order": 1
+	},
+	"Room5": {
+		"Type": "Room",
+		"Name": "Warehouse",
+		"Description": "You can see two different areas, the first sets up the unloading zone for the incoming lorries, and the second is some kind of shelves storing different goods. ",
+		"Order": 1
+	},
+	"Room6": {
+		"Type": "Room",
+		"Name": "Vault",
+		"Description": "You find nothing but quietness and some kind of broken dispenser machine right in the middle of the room. ",
+		"Order": 1
+	},
+	"Exit0": {
+		"Type": "Exit",
+		"Name": "Secondary road",
+		"Description": "A secondary road going towards the enemy territory. ",
+		"Orientation": "East",
+		"Origin": "Outskirts",
+		"Destination": "Yard",
+		"Locked": false,
+		"Key": null,
+		"Order": 8
+	},
+	"Exit1": {
+		"Type": "Exit",
+		"Name": "Main Door",
+		"Description": "Main entrance to the enemy facility. ",
+		"Orientation": "East",
+		"Origin": "Yard",
+		"Destination": "Main Hall",
+		"Locked": true,
+		"Key": "Main Key",
+		"Order": 8
+	},
+	"Exit2": {
+		"Type": "Exit",
+		"Name": "Yard's staircase",
+		"Description": "Staircase leading to the parking which ends in front of the facility's warehouse backdoor. ",
+		"Orientation": "North",
+		"Origin": "Yard",
+		"Destination": "Warehouse",
+		"Locked": false,
+		"Key": null,
+		"Order": 8
+	},
+	"Exit3": {
+		"Type": "Exit",
+		"Name": "Secondary road",
+		"Description": "A secondary road going towards the enemy territory. ",
+		"Orientation": "North",
+		"Origin": "Main Hall",
+		"Destination": "Warehouse",
+		"Locked": false,
+		"Key": null,
+		"Order": 8
+	},
+	"Exit4": {
+		"Type": "Exit",
+		"Name": "Hallway",
+		"Description": "A dark and deep hallway",
+		"Orientation": "South",
+		"Origin": "Main Hall",
+		"Destination": "Lab",
+		"Locked": false,
+		"Key": null,
+		"Order": 8
+	},
+	"Exit5": {
+		"Type": "Exit",
+		"Name": "Security Door",
+		"Description": "A robust door, made of steel and covered by numerous security mechanisms. ",
+		"Orientation": "West",
+		"Origin": "Lab",
+		"Destination": "Vault",
+		"Locked": true,
+		"Key": "Autorization",
+		"Order": 8
 	},
 	"Player1": {
 		"Type": "Player",
-		"Name": "the Answer" ,
+		"Name": "The Answer" ,
+		"Description": "This story heroe",
 		"CurrentLocation": "Outskirts",
 		"HP": 100,
 		"Attack": 10,
-		"Inventory": ["'Telephone' : 1", "'Potion': 1"],
+		"Inventory": {"Telephone" : 1, "Potion": 1, "Super Last Oportunity" :1, "Knife" : 1},
 		"IsAlive": true,
 		"CurrentWeapon": "Knife",
-		"Order": 4
+		"Order": 9
 	},
-	"Player2": {
-		"Type": "Player",
-		"Name": "bloblo" ,
+	"Item1": {
+		"Type": "Item",
+		"Name": "Potion",
+		"Description": "Heals 50 HP points" ,
+		"Items": null,
+		"CurrentLocation": "Potion Chest",
+		"Order":6
+	},
+	"Item2": {
+		"Type": "Item",
+		"Name": "Super Last Oportunity",
+		"Description": "Resurrects de player automatically and restores his full HP",
+		"Items": null,
+		"CurrentLocation": null,
+		"Order":6
+	},
+	"Item3": {
+		"Type": "Item",
+		"Name": "Telephone" ,
+		"Description": "Allows calls with the HQ",
+		"Items": null,
+		"CurrentLocation": null,
+		"Order":6
+	},
+	"Item4": {
+		"Type": "Item",
+		"Name": "Gun Chest" ,
+		"Description": "Chest with a gun within",
+		"Items": ["Gun: 1"],
+		"CurrentLocation": "Main Hall",
+		"Order":5
+	},
+	"Item5": {
+		"Type": "Item",
+		"Name": "Machine gun chest" ,
+		"Description": "Chest with a machine gun within",
+		"Items": ["Machine gun: 1"],
+		"CurrentLocation": "Lab",
+		"Order":5
+	},
+	"Item6": {
+		"Type": "Item",
+		"Name": "Potion Chest" ,
+		"Description": "Chest with a potion within",
+		"Items": ["Potion Chest"],
+		"CurrentLocation": "Vault",
+		"Order":5
+	},
+	"Item7": {
+		"Type": "Item",
+		"Name": "Truck Keys" ,
+		"Description": "Allows the escape",
+		"Items": null,
 		"CurrentLocation": "Warehouse",
-		"HP": 100,
+		"Order":6
+	},
+	"Item8": {
+		"Type": "Item",
+		"Name": "Autorization" ,
+		"Description": "Allows the entrance to the Vault",
+		"Items": null,
+		"CurrentLocation": "Main Hall",
+		"Order":6
+	},
+	"Item9": {
+		"Type": "Item",
+		"Name": "Main Key" ,
+		"Description": "Allows the enemy facility",
+		"CurrentLocation": "Main Hall",
+		"Items": null,
+		"Order":6
+	},
+	"Item10": {
+		"Type": "Item",
+		"Name": "Truck" ,
+		"Description": "Escape vehicle",
+		"CurrentLocation": "Warehouse",
+		"Items": null,
+		"Order":6
+	},
+	"Weapon1" : {
+		"Type": "Weapon",
+		"Name": "Knife" ,
+		"Description": "Regular hunting knife" ,
+		"Power": 4,
+		"CurrentLocation" : null,
+		"Order":7
+	},
+	"Weapon2": {
+		"Type": "Weapon",
+		"Name": "Gun" ,
+		"Description": "Regular 9mm gun" ,
+		"Power": 8,
+		"CurrentLocation": "Gun chest",
+		"Order":7
+	},
+	"Weapon3": {
+		"Type": "Weapon",
+		"Name": "Machine gun" ,
+		"Description": "Light machine gun" ,
+		"Power": 10,
+		"CurrentLocation": "Machine gun chest",
+		"Order":7
+	},
+	"Character1": {
+		"Type": "Charact",
+		"Name": "Boss",
+		"Description": "Antidote's guardian",
+		"CurrentLocation": "Lab",
+		"HP": 50,
 		"Attack": 10,
-		"Inventory": ["Truck Keys"],
+		"Inventory": {"Machine gun":1},
+		"IsAlive": true,
+		"CurrentWeapon": "Machine gun",
+		"Order": 9,
+		"Relationship" : "Enemy"
+	},
+	"Character2": {
+		"Type": "Charact",
+		"Name": "The Iceman" ,
+		"Description": "Mission specialist driver",
+		"CurrentLocation": "Warehouse",
+		"HP": 50,
+		"Attack": 10,
+		"Inventory": {"Truck Keys": 1,"Gun" :1},
 		"IsAlive": true,
 		"CurrentWeapon": "Gun",
-		"Order": 4
+		"Order": 9,
+		"Relationship" : "Friend"
 	},
-	"Player3": {
-		"Type": "Player",
-		"Name": "estoeU" ,
-		"CurrentLocation": "Warehouse",
-		"HP": 100,
+	"Character3": {
+		"Type": "Charact",
+		"Name": "The Grandmama" ,
+		"Description": "Spy inserted within the enemy organization" ,
+		"CurrentLocation": "Hall",
+		"HP": 50,
 		"Attack": 10,
-		"Inventory": ["Truck Keys"],
+		"Inventory": {"Autorization" : 1,"Gun":1},
 		"IsAlive": true,
 		"CurrentWeapon": "Gun",
-		"Order": 4
-	}
+		"Order": 9,
+		"Relationship" : "Friend"
+	}	
+	
  }
  
 
